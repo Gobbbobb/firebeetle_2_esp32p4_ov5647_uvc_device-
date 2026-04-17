@@ -1,0 +1,193 @@
+dependencies:
+  esp_cam_sensor:
+    dependencies:
+    - name: idf
+      version: '>=5.3'
+    - name: esp_sccb_intf
+      override_path: ../esp_sccb_intf
+      version: '>=0.0.5'
+    - name: espressif/cmake_utilities
+      version: 0.*
+    source:
+      path: C:\esp\v5.5.3\esp-video-components\esp_cam_sensor
+      type: local
+    targets:
+    - esp32p4
+    - esp32s3
+    - esp32c3
+    - esp32c5
+    - esp32c6
+    - esp32c61
+    version: 2.0.1
+  esp_ipa:
+    dependencies:
+    - name: idf
+      version: '>=5.4'
+    - name: espressif/cmake_utilities
+      version: 0.*
+    source:
+      path: C:\esp\v5.5.3\esp-video-components\esp_ipa
+      type: local
+    targets:
+    - esp32p4
+    version: 1.3.1
+  esp_sccb_intf:
+    dependencies:
+    - name: idf
+      version: '>=5.3'
+    source:
+      path: C:\esp\v5.5.3\esp-video-components\esp_sccb_intf
+      type: local
+    version: 0.0.8
+  esp_video:
+    dependencies:
+    - name: idf
+      version: '>=5.4'
+    - name: espressif/cmake_utilities
+      version: 0.*
+    - name: espressif/esp_h264
+      rules:
+      - if: target in [esp32p4]
+      version: 1.0.4
+    - name: espressif/usb_host_uvc
+      rules:
+      - if: target in [esp32p4, esp32s3]
+      version: 2.4.*
+    - name: esp_cam_sensor
+      override_path: ../esp_cam_sensor
+      version: 2.0.*
+    - name: esp_ipa
+      override_path: ../esp_ipa
+      rules:
+      - if: target in [esp32p4]
+      version: 1.3.*
+    source:
+      path: C:\esp\v5.5.3\esp-video-components\esp_video
+      type: local
+    targets:
+    - esp32p4
+    - esp32s3
+    - esp32c3
+    - esp32c5
+    - esp32c6
+    - esp32c61
+    version: 2.0.1
+  espressif/cmake_utilities:
+    component_hash: 351350613ceafba240b761b4ea991e0f231ac7a9f59a9ee901f751bddc0bb18f
+    dependencies:
+    - name: idf
+      require: private
+      version: '>=4.1'
+    source:
+      registry_url: https://components.espressif.com
+      type: service
+    version: 0.5.3
+  espressif/esp_h264:
+    component_hash: fa5daaebc8a304f0b79bc57e51aab43e0a03eabc2ba3865bff4063c56b5d4564
+    dependencies:
+    - name: idf
+      require: private
+      version: '>=4.4'
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    version: 1.0.4
+  espressif/esp_new_jpeg:
+    component_hash: 2f06f88e94fbc781b26a9be4291ff4ffc88596c90436a1e1358a7a38296b44ae
+    dependencies: []
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    targets:
+    - esp32
+    - esp32s2
+    - esp32s3
+    - esp32p4
+    - esp32c2
+    - esp32c3
+    - esp32c5
+    - esp32c6
+    version: 1.0.0
+  espressif/tinyusb:
+    component_hash: 5ea9d3b6d6b0734a0a0b3491967aa0e1bece2974132294dbda5dd2839b247bfa
+    dependencies:
+    - name: idf
+      require: private
+      version: '>=5.0'
+    source:
+      registry_url: https://components.espressif.com
+      type: service
+    targets:
+    - esp32s2
+    - esp32s3
+    - esp32p4
+    - esp32h4
+    version: 0.19.0~2
+  espressif/usb_device_uvc:
+    component_hash: c4ef856da7515734cf3b1dae774e350aa33b032b08f394ff2b10045d257c2ea5
+    dependencies:
+    - name: espressif/cmake_utilities
+      registry_url: https://components.espressif.com
+      require: private
+      version: '*'
+    - name: espressif/tinyusb
+      registry_url: https://components.espressif.com
+      require: private
+      version: '>=0.18.0~1'
+    - name: idf
+      require: private
+      version: '>=5.0'
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    targets:
+    - esp32s2
+    - esp32s3
+    - esp32p4
+    version: 1.2.0
+  espressif/usb_host_uvc:
+    component_hash: f20c4e4dea50536e2e29daaf589b5f5984402284c155867daef27d6b64869f78
+    dependencies:
+    - name: idf
+      require: private
+      version: '>=5.0'
+    - name: espressif/usb
+      registry_url: https://components.espressif.com
+      require: public
+      rules:
+      - if: idf_version >=6.0
+      - if: target not in ["linux"]
+      version: ^1.0.0
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    targets:
+    - esp32s2
+    - esp32s3
+    - esp32p4
+    - esp32h4
+    - linux
+    version: 2.4.2
+  example_video_common:
+    dependencies:
+    - name: idf
+      version: '>=5.4'
+    - name: espressif/esp_new_jpeg
+      rules:
+      - if: target not in [esp32c61]
+      version: '*'
+    source:
+      path: C:\esp\v5.5.3\esp-video-components\esp_video\examples\common_components\example_video_common
+      type: local
+    version: '*'
+  idf:
+    source:
+      type: idf
+    version: 5.5.3
+direct_dependencies:
+- esp_video
+- espressif/usb_device_uvc
+- example_video_common
+manifest_hash: 85e21ad83f291c91236193bbb90dcf382ebfe42d4f46d9a6c484acfae8d51821
+target: esp32p4
+version: 2.0.0
